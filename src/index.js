@@ -2,9 +2,8 @@ import React, { useRef } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-const Final = () => {
+const Ui = () => {
   const xmlRef = useRef(null);
-
   const handleDownloadXml = async () => {
     const xml = await xmlRef.current.getXml();
     if (xml) {
@@ -19,7 +18,6 @@ const Final = () => {
       URL.revokeObjectURL(url);
     }
   };
-
   const handleDownloadSvg = async () => {
     const svg = await xmlRef.current.getSvg();
     if (svg) {
@@ -37,16 +35,18 @@ const Final = () => {
   return (
     <>
       <App ref={xmlRef} />
-      <button
-        onClick={async () => {
-          const xml = await xmlRef.current.getXml();
-          console.log({ xml });
-        }}
-      >
-        get xml
-      </button>
-      <button onClick={handleDownloadXml}>Download Xml</button>
-      <button onClick={handleDownloadSvg}>Download Svg</button>
+      <div style={{ margin: "auto", width: "400px", marginTop: "100px" }}>
+        <button
+          onClick={async () => {
+            const xml = await xmlRef.current.getXml();
+            console.log({ xml });
+          }}
+        >
+          show Xml
+        </button>
+        <button onClick={handleDownloadXml}>Download Xml</button>
+        <button onClick={handleDownloadSvg}>Download Svg</button>
+      </div>
     </>
   );
 };
@@ -54,6 +54,6 @@ const Final = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Final />
+    <Ui />
   </React.StrictMode>
 );

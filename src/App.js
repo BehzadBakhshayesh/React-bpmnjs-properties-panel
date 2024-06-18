@@ -8,6 +8,7 @@ import BpmnModeler from "bpmn-js/lib/Modeler";
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
+  CamundaPlatformPropertiesProviderModule,
 } from "bpmn-js-properties-panel";
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
@@ -31,6 +32,7 @@ const App = forwardRef(({ diagramXML = initXml }, ref) => {
       additionalModules: [
         BpmnPropertiesPanelModule,
         BpmnPropertiesProviderModule,
+        CamundaPlatformPropertiesProviderModule,
       ],
     });
 
