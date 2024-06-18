@@ -61,6 +61,15 @@ const App = forwardRef(({ diagramXML = initXml }, ref) => {
           return null;
         }
       },
+      getSvg: async () => {
+        try {
+          const { svg } = await bpmnModeler.current.saveSVG({ format: true });
+          return svg;
+        } catch (err) {
+          console.error("Failed to save BPMN SVG", err);
+          return null;
+        }
+      },
     }),
     []
   );

@@ -4,6 +4,36 @@ import App from "./App";
 
 const Final = () => {
   const xmlRef = useRef(null);
+
+  const handleDownloadXml = async () => {
+    const xml = await xmlRef.current.getXml();
+    if (xml) {
+      const blob = new Blob([xml], { type: "application/xml" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "diagram.bpmn";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  const handleDownloadSvg = async () => {
+    const svg = await xmlRef.current.getSvg();
+    if (svg) {
+      const blob = new Blob([svg], { type: "image/svg+xml" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "diagram.svg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  };
   return (
     <>
       <App ref={xmlRef} />
@@ -15,6 +45,8 @@ const Final = () => {
       >
         get xml
       </button>
+      <button onClick={handleDownloadXml}>Download Xml</button>
+      <button onClick={handleDownloadSvg}>Download Svg</button>
     </>
   );
 };
